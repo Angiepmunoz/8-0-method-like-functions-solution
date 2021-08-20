@@ -6,17 +6,10 @@ const {
   mySliceFunction,
   myJoinFunction,
   myReverseFunction,
-  myUnshiftFunction
+  myUnshiftFunction,
 } = require("./index");
 
 describe("myPushFunction()", () => {
-  test("does not use the push method", () => {
-    const array = ["module", "one", "is", "finally", "over"];
-    const element = "yas";
-    const funcString = myPushFunction(array, element).toString();
-    expect(funcString.includes(".push")).toBe(false);
-  });
-
   test("returns the new length of the array", () => {
     const array = ["module", "one", "is", "finally", "over"];
     const element = "yas";
@@ -39,6 +32,13 @@ describe("myPushFunction()", () => {
 
   test("adds multiple elements to the end of the array", () => {
     expect(myPushFunction([1, 2, 3, 4, 5], 6, 7, 8)).toBe(8);
+  });
+
+  test("does not use the push method", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const element = "yas";
+    const funcString = myPushFunction(array, element).toString();
+    expect(funcString.includes(".push")).toBe(false);
   });
 });
 
@@ -125,12 +125,6 @@ describe("myIndexOfFunction()", () => {
     expect(myIndexOfFunction(numArr, 5)).toBe(4);
   });
 
-  test("does not use the indexOf method", () => {
-    const array = ["module", "one", "is", "finally", "over"];
-    const funcString = myIndexOfFunction(array).toString();
-    expect(funcString.includes(".indexOf")).toBe(false);
-  });
-
   test("returns -1 if the searched for element is not in the array from the given starting index to the end of the array", () => {
     const array = ["fire", "water", "earth", "air"];
     expect(myIndexOfFunction(array, "water", 2)).toBe(-1);
@@ -151,6 +145,12 @@ describe("myIndexOfFunction()", () => {
     const numArr = [1, 2, 3, 4, 5];
     expect(myIndexOfFunction(numArr, 2, -2)).toBe(-1);
     expect(myIndexOfFunction(numArr, 2, -5)).toBe(1);
+  });
+
+  test("does not use the indexOf method", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const funcString = myIndexOfFunction(array).toString();
+    expect(funcString.includes(".indexOf")).toBe(false);
   });
 });
 
@@ -218,7 +218,7 @@ describe("mySliceFunction()", () => {
     const expected2 = [2, 3, 4, 5];
     expect(mySliceFunction(numArr, 1, 10)).toStrictEqual(expected2);
   });
-  
+
   test("does not use the slice method", () => {
     const array = ["module", "one", "is", "finally", "over"];
     const funcString = mySliceFunction(array).toString();
@@ -242,9 +242,9 @@ describe("myJoinFunction()", () => {
     );
   });
 
-  test("returns an empty string if given and empty array",()=>{
-      expect(myJoinFunction([])).toEqual('');
-      expect(myJoinFunction([],'')).toEqual('');
+  test("returns an empty string if given and empty array", () => {
+    expect(myJoinFunction([])).toEqual("");
+    expect(myJoinFunction([], "")).toEqual("");
   });
 
   test("does not use the join method", () => {
@@ -255,48 +255,49 @@ describe("myJoinFunction()", () => {
 });
 
 describe("myReverseFunction()", () => {
-    test("returns an array with the elements reversed", () => {
-      const array = ["module", "one", "is", "finally", "over"];
-      const expected1 = [ 'over', 'finally', 'is', 'one', 'module' ]
-      expect(myReverseFunction(array)).toEqual(expected1);
+  test("returns an array with the elements reversed", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const expected1 = ["over", "finally", "is", "one", "module"];
+    expect(myReverseFunction(array)).toEqual(expected1);
 
-      const numArr = [1,2,3,4,5];
-      const expected2 = [5,4,3,2,1];
-      expect(myReverseFunction(numArr)).toEqual(expected2);
-    });
-  
-    test("does not use the reverse method", () => {
-      const array = ["module", "one", "is", "finally", "over"];
-      const funcString = myReverseFunction(array).toString();
-      expect(funcString.includes(".reverse")).toBe(false);
-    });
+    const numArr = [1, 2, 3, 4, 5];
+    const expected2 = [5, 4, 3, 2, 1];
+    expect(myReverseFunction(numArr)).toEqual(expected2);
   });
 
-  describe("myUnShiftFunction()", () => {
-    test("returns an array with the correct length", () => {
-      const array = ["module", "one", "is", "finally", "over"];
-      const element = "yas";
-      expect(myUnshiftFunction(array, element).length).toEqual(6);
-    });
-  
-    test("adds an element to the start of the array", () => {
-      const array = ["module", "one", "is", "finally", "over"];
-      const element = "yas";
-      expect(myUnshiftFunction(array, element)[0]).toEqual("yas");
-    });
-  
-    test("adds multiple elements to the start of the array", () => {
-      const numArr = [4,5,6,7,8];
-      const expected = [1,2,3,4,5,6,7,8]  
-      expect(myUnshiftFunction(numArr, 1,2,3).length).toBe(8);
-      expect(myUnshiftFunction(numArr, 1,2,3)).toEqual(expect.arrayContaining(expected))
-
-    });
-
-    test("does not use the unshift method", () => {
-        const array = ["module", "one", "is", "finally", "over"];
-        const element = "yas";
-        const funcString = myUnshiftFunction(array, element).toString();
-        expect(funcString.includes(".unshift")).toBe(false);
-      });
+  test("does not use the reverse method", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const funcString = myReverseFunction(array).toString();
+    expect(funcString.includes(".reverse")).toBe(false);
   });
+});
+
+describe("myUnShiftFunction()", () => {
+  test("returns an array with the correct length", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const element = "yas";
+    expect(myUnshiftFunction(array, element).length).toEqual(6);
+  });
+
+  test("adds an element to the start of the array", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const element = "yas";
+    expect(myUnshiftFunction(array, element)[0]).toEqual("yas");
+  });
+
+  test("adds multiple elements to the start of the array", () => {
+    const numArr = [4, 5, 6, 7, 8];
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8];
+    expect(myUnshiftFunction(numArr, 1, 2, 3).length).toBe(8);
+    expect(myUnshiftFunction(numArr, 1, 2, 3)).toEqual(
+      expect.arrayContaining(expected)
+    );
+  });
+
+  test("does not use the unshift method", () => {
+    const array = ["module", "one", "is", "finally", "over"];
+    const element = "yas";
+    const funcString = myUnshiftFunction(array, element).toString();
+    expect(funcString.includes(".unshift")).toBe(false);
+  });
+});
