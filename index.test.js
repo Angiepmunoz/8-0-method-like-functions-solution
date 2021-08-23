@@ -299,7 +299,9 @@ describe("myUnShiftFunction()", () => {
   });
 
   test.skip("adds multiple elements to the start of the array", () => {
-    expect(myUnshiftFunction([1, 2, 3, 4, 5], 6, 7, 8)).toBe(8);
+    const numArr = [1,2,3,4,5]
+    expect(myUnshiftFunction(numArr, 6, 7, 8)).toBe(8);
+    expect(numArr).toStrictEqual([6,7,8,1,2,3,4,5]);
   });
 
   test("does not use the unshift method", () => {
