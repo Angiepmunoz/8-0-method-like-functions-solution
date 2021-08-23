@@ -115,11 +115,16 @@ function myJoinFunction(array, separator = ",") {
  * FULL DISCLOSURE: this 'reverse method function' was modified for the purpose of this exercise. The actual method behaves differently. Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse
  */
 function myReverseFunction(array) {
-  let reversedArr = [];
-  while (array.length) {
-    reversedArr.push(array.pop());
+  const storageArr = [];
+  while(array.length){
+    let el = array.shift()
+    storageArr.unshift(el);
   }
-  return reversedArr;
+  
+  for(const el of storageArr){
+    array.push(el);
+  }
+  return array;
 }
 
 /**
@@ -131,11 +136,18 @@ function myReverseFunction(array) {
  * FULL DISCLOSURE: this 'unshift method function' was modified for the purpose of this exercise. The actual method behaves differently. Learn more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
  */
 function myUnshiftFunction(array) {
-  let unshiftArr = [...arguments].slice(1);
-  for (let i = 0; i < array.length; i++) {
-    unshiftArr.push(array[i])
+  const storageArr = [];
+  for(let i = 1; i < arguments.length; i++){
+    storageArr.push(arguments[i]);
   }
-  return unshiftArr;
+  while(array.length){
+    let el = array.shift();
+    storageArr.push(el);
+  }
+  for(let el of storageArr){
+    array.push(el);
+  }
+  return array.length;
 }
 
 
